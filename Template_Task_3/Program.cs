@@ -6,7 +6,17 @@ namespace Template_Task_3;
 
 internal class Program
 {
-    // Test
+    // 1.Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess 
+    //grundläggande funktion
+
+    /* The stack is a memory structure that works in a very strict order following the rule LIFO.
+     * Meaning that the last thing we add is the first one to get removed. The stack keeps track 
+     * of all the methods and the local variable those methods contain. When we call such method
+     it will get pushed on the stack and once the method is finished it will get automatically cleaned up
+     so it can instantly free the memory. Stack is self-maintaining and very fast 
+     As an example for it we can imagine a stack of shoeboxes where you only get to take the very top one
+     before you can reach the box under it.*/
+
     // Dictionary: snabb uppslagning av produkter via produktkod (key = kod, value = produkt)
     static Dictionary<string, Product> products = new Dictionary<string, Product>();
 
