@@ -31,7 +31,7 @@ internal class Program
      */
 
     // 2. Vad är Value Types respektive Reference Types och vad skiljer dem åt? 
-    
+
     /* 
      Value types are those that directly save their value in the memory of the program. 
      They always follow a rule that says they will be stored depending where said value is declared.
@@ -46,6 +46,22 @@ internal class Program
      Meanwhile if you copy a reference type both variables will point at the same object, 
      that meaning when you change one the other will change too.
      */
+    
+    // 3. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den 
+    //andra returnerar 4, varför?
+
+     /* 
+      In the first method both variable x and y are value types (int) so when we make y = x
+      that copy of x becomes a independet copy even if we change y to 4, x wont be affected by that
+      And when the program runs the return x; The console will still print out 3.
+      
+      Meanwhile in the second method both x and y are reference types becasue MyInt is a class 
+      that leads to when we set y = x both of those variables will point at the same object in memory.
+      The moment we declare y being 4 because above it we declared y = x both variables will point at the same object.
+      Meaning the inital value of x is now 4 too and once the return runs in the console 4 will be shown.
+      */
+
+
 
     // Dictionary: snabb uppslagning av produkter via produktkod (key = kod, value = produkt)
     static Dictionary<string, Product> products = new Dictionary<string, Product>();
