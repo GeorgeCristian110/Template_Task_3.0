@@ -6,6 +6,7 @@ namespace Template_Task_3;
 
 internal class Program
 {
+    // Test
     // Dictionary: snabb uppslagning av produkter via produktkod (key = kod, value = produkt)
     static Dictionary<string, Product> products = new Dictionary<string, Product>();
 
