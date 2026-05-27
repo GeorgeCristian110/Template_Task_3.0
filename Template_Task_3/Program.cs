@@ -11,11 +11,41 @@ internal class Program
 
     /* The stack is a memory structure that works in a very strict order following the rule LIFO.
      * Meaning that the last thing we add is the first one to get removed. The stack keeps track 
-     * of all the methods and the local variable those methods contain. When we call such method
-     it will get pushed on the stack and once the method is finished it will get automatically cleaned up
-     so it can instantly free the memory. Stack is self-maintaining and very fast 
-     As an example for it we can imagine a stack of shoeboxes where you only get to take the very top one
-     before you can reach the box under it.*/
+     of all the methods and the local variable those methods contain. When we call said method
+     it will get pushed on the stack and once the method is finished running it will get automatically 
+     cleaned up so it can instantly free the memory. Stack is self-maintaining and very fast. 
+     *As an example for it we can imagine a stack of shoeboxes where you only get to take the very top one
+     before you can reach the box under it.
+
+      Example: void AnyMethod() { int x = 5; } => x is stored on the stack and gets removed once AnyMethod is done being used.
+    
+     * Different from stack the heap is a much larger memory structure where our objects are stored without
+       any specific order. The heap in comparison to the stack does not clean itself up alone. 
+     * Instead for it to be cleaned up the garbage collector runs periodically to eliminate said objects
+       that are no longer referenced by anything or even used by the program.
+     * An example used to represent the heap can be if you think about it a messy room where clothes
+       are all over the place. You can grab anything you want whenever you want but someone has to clean
+       it up from time to time.
+
+       Example: MyInt obj = new MyInt(); => in this case the obj stays on the heap until GC runs and clean it up.
+     */
+
+    // 2. Vad är Value Types respektive Reference Types och vad skiljer dem åt? 
+    
+    /* 
+     Value types are those that directly save their value in the memory of the program. 
+     They always follow a rule that says they will be stored depending where said value is declared.
+     If they are declared inside a method then they will be stored on the stack but if we declare those
+     variables inside a class then they will be stored on the heap. Example of value types are: int, bool, double, char..
+     
+     Reference types are those that don't store any actual value directly. Instead they store a reference
+     on the stack that then points on the heap where an actual object lives. 
+     Those types get cleaned up by the GC. Reference type are for example: class, string, object, interface.
+    
+     The difference between them is that if you copy a value type you will get a new independent copy of it.
+     Meanwhile if you copy a reference type both variables will point at the same object, 
+     that meaning when you change one the other will change too.
+     */
 
     // Dictionary: snabb uppslagning av produkter via produktkod (key = kod, value = produkt)
     static Dictionary<string, Product> products = new Dictionary<string, Product>();
