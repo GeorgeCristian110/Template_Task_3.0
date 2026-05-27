@@ -216,7 +216,16 @@ internal class Program
         // TODO:
         // Lägg till minst 10 produkter i products-dictionaryn.
         // Välj egna koder, namn, priser och lagersaldon.
-
+        products["COFFEE"] = new Product("COF", "Coffee", 5.00m, 100);
+        products["TEA"] = new Product("TE", "Tea", 4.30m, 30);
+        products["MILK"] = new Product("MIL", "Milk", 10.00m, 75);
+        products["BREAD"] = new Product("BRD", "Bread", 25.00m, 40);
+        products["BUTTER"] = new Product("BTR", "Butter", 50.00m, 120);
+        products["JUICE"] = new Product("JUC", "Juice", 20.00m, 80);
+        products["SANDWICH"] = new Product("SAN", "Sandwich", 15.25m, 20);
+        products["CUPCAKES"] = new Product("CPK", "Cupcakes", 12.00m, 35);
+        products["CHOCOLATE"] = new Product("CHC", "Chocolate", 33.00m, 90);
+        products["PASTA"] = new Product("PST", "Pasta", 15.00m, 75);
 
     }
 
@@ -230,7 +239,16 @@ internal class Program
         // Räkna även ut totalt lagervärde.
         // Lagervärde för en produkt:
         // product.Price * product.Stock
+        decimal totalCost = 0;
+        foreach(Product product in products.Values)
+        {
+            decimal productValue = product.Price * product.Stock;
+            totalCost += productValue;
+            Console.WriteLine($"{product.Code} {product.Name} {product.Price}sek  Stock: {product.Stock} " +
+                $"Stock value for product is : {productValue}sek");
+        }
 
+        Console.WriteLine($"The total stock value is: {totalCost}sek");
 
         // Fråga:
         // Varför passar Dictionary bra för ett produktregister?
