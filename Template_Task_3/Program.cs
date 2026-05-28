@@ -382,7 +382,7 @@ internal class Program
         // en femte produkt? Vilken metod är enklare att utöka?
 
         // Adding a 5th product to the old GetPriceBad would need me to bring in another else if block
-        // which makes the code longer and harder to run and reach each time.
+        // which makes the code longer and harder to run and read each time.
         // Dictionary is much easier and faster to expand and add one more product as i just need to write
         // another line of prices["CODE"] = price. Dictionary also behaves different looking up they key of the item
         // instead of checking every if / else condition one by one at the time.
