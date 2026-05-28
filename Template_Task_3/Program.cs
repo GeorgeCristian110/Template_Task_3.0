@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.ComponentModel.Design;
+using System.Security.Cryptography.X509Certificates;
 using Template_Task_3.DemoClasses;
 using Template_Task_3.Helpers;
 using Template_Task_3.StackAndHeap;
@@ -509,7 +510,6 @@ internal class Program
 
     static void SellProduct()
     {
-        // TODO:
         // Kontrollera om customerQueue är tom — skriv meddelande om den är det.
         // Använd Peek för att se vilken kund som står först (utan att ta bort dem).
         // Läs in produktkod.
@@ -524,11 +524,44 @@ internal class Program
         // Bestäm om kunden ska tas bort från kön efter köp eller inte.
         // Motivera ditt val i kommentar.
 
-        Console.WriteLine("TODO: Implementera SellProduct.");
+        if (customerQueue.Count == 0)
+        {
+            Console.WriteLine("There is no customer waiting in the queue.");
+            return;
+        }
+
+        Customer currentCustomer = customerQueue.Peek();
+
+        string productCode = InputHelpers.ReadString("Enter product code: ");
+
+        if (products.TryGetValue(productCode, out Product? product))
+        {
+            if (product.Stock > 0)
+            {
+                product.Stock--;
+
+                Sale newSale = new Sale(product.Code, product.Name, product.Price, currentCustomer.Name);
+
+                saleHistory.Push(newSale);
+
+                logMessages.Add($"We sold {product.Name} to {currentCustomer.Name}");
+                Console.WriteLine($"Transaction was made! {product.Name} was sold to {currentCustomer.Name}");
+            }
+            else
+            {
+                Console.WriteLine("Sorry the product desired is out of stock.");
+            } 
+        }
+        else
+        {
+            Console.WriteLine("The code introduced is invalid. Please try again!");
+        }
+
 
         // Fråga:
         // Varför sparar vi försäljningar i en Stack?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: We are saving it in a stack becasue by doing so the latest transaction comes first." +
+            " Which makes it easier to view the most recent sale and correct it in case of an error.");
     }
 
     static void UndoLastSale()
