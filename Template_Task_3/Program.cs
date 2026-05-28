@@ -216,16 +216,16 @@ internal class Program
         // TODO:
         // Lägg till minst 10 produkter i products-dictionaryn.
         // Välj egna koder, namn, priser och lagersaldon.
-        products["COFFEE"] = new Product("COF", "Coffee", 5.00m, 100);
-        products["TEA"] = new Product("TE", "Tea", 4.30m, 30);
-        products["MILK"] = new Product("MIL", "Milk", 10.00m, 75);
-        products["BREAD"] = new Product("BRD", "Bread", 25.00m, 40);
-        products["BUTTER"] = new Product("BTR", "Butter", 50.00m, 120);
-        products["JUICE"] = new Product("JUC", "Juice", 20.00m, 80);
-        products["SANDWICH"] = new Product("SAN", "Sandwich", 15.25m, 20);
-        products["CUPCAKES"] = new Product("CPK", "Cupcakes", 12.00m, 35);
-        products["CHOCOLATE"] = new Product("CHC", "Chocolate", 33.00m, 90);
-        products["PASTA"] = new Product("PST", "Pasta", 15.00m, 75);
+        products["COFFEE"] = new Product("COFFE", "Coffee", 5.00m, 100);
+        products["TEA"] = new Product("TEA", "Tea", 4.30m, 30);
+        products["MILK"] = new Product("MILK", "Milk", 10.00m, 75);
+        products["BREAD"] = new Product("BREAD", "Bread", 25.00m, 40);
+        products["BUTTER"] = new Product("BUTTER", "Butter", 50.00m, 120);
+        products["JUICE"] = new Product("JUICE", "Juice", 20.00m, 80);
+        products["SANDWICH"] = new Product("SANWICH", "Sandwich", 15.25m, 20);
+        products["CUPCAKES"] = new Product("CUPCAKES", "Cupcakes", 12.00m, 35);
+        products["CHOCOLATE"] = new Product("CHOCOLATE", "Chocolate", 33.00m, 90);
+        products["PASTA"] = new Product("PAST", "Pasta", 15.00m, 75);
 
     }
 
@@ -252,26 +252,29 @@ internal class Program
 
         // Fråga:
         // Varför passar Dictionary bra för ett produktregister?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: It works good on a product register because of its speed to show" +
+            "the product serached no matter the size, the dictionary also does not show duplicates of same item." +
+            "That is because every item has a unique key that point to said object in memory");
     }
 
     static void FindProduct()
     {
         Console.Write("Ange produktkod: ");
-        
+        string productCode = Console.ReadLine()!.ToUpper();
 
-        // TODO:
-        // Hämta produktens code
-        // Gör koden till stora bokstäver med .ToUpper()
-        // Slå upp produkten med TryGetValue
-        // Om produkten finns, skriv ut den.
-        // Om produkten saknas, skriv ett felmeddelande.
-
-        Console.WriteLine("TODO: Implementera FindProduct.");
+        if(products.TryGetValue(productCode, out Product? product))
+        {
+            Console.WriteLine($"The product for {productCode} is : {product.Name} {product.Price}sek {product.Stock}st");
+        } else
+        {
+            Console.WriteLine("Product not found!");
+        }
 
         // Fråga:
         // Varför är TryGetValue bättre än att skriva products[code] direkt?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("TryGetValue is better than products[code] because it will not crash our progam" +
+            " in case a wrong input is given instead of throwing an exception TryGetValue handles that as a missing key" +
+            " which will result in the program return false and a error message instead of crashing.");
     }
 
     static void AddProduct()
