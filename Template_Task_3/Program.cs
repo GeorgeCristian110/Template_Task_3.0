@@ -213,7 +213,7 @@ internal class Program
         // Exempel på hur du lägger till en produkt i dictionaryn:
         // products["KAFFE"] = new Product("KAFFE", "Kaffe", 15.00m, 50);
         //
-        // TODO:
+        //
         // Lägg till minst 10 produkter i products-dictionaryn.
         // Välj egna koder, namn, priser och lagersaldon.
         products["COFFEE"] = new Product("COFFE", "Coffee", 5.00m, 100);
@@ -232,8 +232,6 @@ internal class Program
     static void PrintProducts()
     {
         Console.WriteLine("=== Produkter ===");
-
-        // TODO:
         // Loopa igenom dictionaryn products.
         // Skriv ut varje produkt.
         // Räkna även ut totalt lagervärde.
@@ -259,6 +257,11 @@ internal class Program
 
     static void FindProduct()
     {
+        // Loopa igenom dictionaryn products.
+        // Skriv ut varje produkt.
+        // Räkna även ut totalt lagervärde.
+        // Lagervärde för en produkt:
+        // product.Price * product.Stock
         Console.Write("Ange produktkod: ");
         string productCode = Console.ReadLine()!.ToUpper();
 
@@ -279,7 +282,6 @@ internal class Program
 
     static void AddProduct()
     {
-        // TODO:
         // Läs in produktkod.
         // Gör produktkoden till stora bokstäver med .ToUpper().
         // Kontrollera om koden redan finns i products — skriv felmeddelande om den gör det.
@@ -315,8 +317,6 @@ internal class Program
 
     static void ChangeStock()
     {
-        Console.WriteLine("TODO: Implementera ChangeStock.");
-        // TODO:
         // Läs in produktkod.
         // Slå upp produkten med TryGetValue.
         // Läs in nytt lagersaldo från användaren.
@@ -324,7 +324,26 @@ internal class Program
         // Ändra produktens Stock. Validera även i product
         // 
         // Logga ändringen.
+        string productCode = InputHelpers.ReadString("Enter product code:").ToUpper();
 
+        if (products.TryGetValue(productCode, out Product? product))
+        {
+            Console.WriteLine($"{productCode} belongs to the item: {product.Name} {product.Price}sek {product.Stock}st");
+            int newStock = InputHelpers.ReadInt("Enter the new stock quantity: ");
+        
+            if(newStock < 0)
+            {
+                Console.WriteLine("The stock quantity cannot be negative");
+                return;
+            } 
+            product.Stock = newStock;
+            Console.WriteLine($"Stock has been updated to {newStock}!");
+            logMessages.Add($"The stock for {product.Name} was updated to {newStock}");
+        } 
+        else
+        {
+            Console.WriteLine("No product was found");
+        }
     }
 
     static decimal GetPriceBad(string code)
