@@ -1,4 +1,5 @@
-﻿using Template_Task_3.DemoClasses;
+﻿using System.Security.Cryptography.X509Certificates;
+using Template_Task_3.DemoClasses;
 using Template_Task_3.Helpers;
 using Template_Task_3.StackAndHeap;
 
@@ -372,7 +373,6 @@ internal class Program
 
     static decimal GetPriceBetter(string code)
     {
-        // TODO:
         // Skriv om GetPriceBad med en lokal Dictionary istället för if/else.
         // Samma fyra produkter och priser som i GetPriceBad ska finnas.
         // Använd TryGetValue för att slå upp priset.
@@ -418,34 +418,52 @@ internal class Program
 
     static void AddCustomerToQueue()
     {
-        Console.WriteLine("TODO: Implementera AddCustomerToQueue.");
-        
-        // TODO:
         // Läs in kundens namn (använd InputHelpers.ReadString).
         // Skapa ett Customer-objekt med namnet.
         // Lägg kunden i customerQueue med Enqueue.
         // Skriv ut att kunden lagts till och vilken plats i kön de har.
         // Lägg till ett loggmeddelande i logMessages.
 
+        string customerName = InputHelpers.ReadString("Please enter your name: ");
+        Customer customer = new Customer(customerName);
+
+        customerQueue.Enqueue(customer);
+
+        Console.WriteLine($"{customerName} is in postion {customerQueue.Count} currently.");
+
+        logMessages.Add($"The customer {customerName} has been added to queue successfully");
+
         // Fråga:
         // Vad betyder FIFO?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: FIFO stand for first in first out. Meaning in this case the first person" +
+            " to go in is also the first person that will come out");
     }
 
     static void ServeNextCustomer()
     {
-        Console.WriteLine("TODO: Implementera ServeNextCustomer.");
-        
-        // TODO:
         // Kontrollera om customerQueue är tom — skriv meddelande om den är det.
         // Om den inte är tom:
         // Använd Dequeue för att ta bort och hämta den första kunden.
         // Skriv ut vilken kund som blev betjänad.
         // Lägg till ett loggmeddelande i logMessages.
 
+        if(customerQueue.Count == 0)
+        {
+            Console.WriteLine("No person in queue.");
+            return; 
+        }
+
+        Customer nextCutomer = customerQueue.Dequeue();
+
+        Console.WriteLine($"Customer {nextCutomer} was served.");
+
+        logMessages.Add($"Served customer: {nextCutomer.Name}");
+
         // Fråga:
         // Varför passar Queue bättre än Stack för en kundkö?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: A queue is better because it follow FIFO,meaning the first customer to arrive" +
+            " is first to be served. Then new customers join that line in order and are being served before" +
+            " they are removed from the front.");
     }
 
     static void PrintCustomerQueue()
