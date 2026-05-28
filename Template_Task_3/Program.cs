@@ -381,11 +381,31 @@ internal class Program
         // Jämför sedan de två metoderna — vad händer om du behöver lägga till
         // en femte produkt? Vilken metod är enklare att utöka?
 
+        // Adding a 5th product to the old GetPriceBad would need me to bring in another else if block
+        // which makes the code longer and harder to run and reach each time.
+        // Dictionary is much easier and faster to expand and add one more product as i just need to write
+        // another line of prices["CODE"] = price. Dictionary also behaves different looking up they key of the item
+        // instead of checking every if / else condition one by one at the time.
+
+        Dictionary<string, decimal> prices = new Dictionary<string, decimal>();
+        prices["KAF"] = 15;
+        prices["TE"] = 12;
+        prices["BUL"] = 18;
+        prices["MCK"] = 35;
+
+        if(prices.TryGetValue(code, out decimal price))
+        {
+            return price;
+        } 
+        
+
         // Fråga:
         // Varför är Dictionary-lösningen bättre än många if/else-satser?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
-
-        return -1;
+        Console.WriteLine("Svar: Because dictionary it is faster, cleaner and easier to expand. Instead of adding a new" +
+            " if/else block everytime we want to bring in a new product here we can use only one line of code.");
+        
+            return -1;
+        
     }
 
     #endregion
