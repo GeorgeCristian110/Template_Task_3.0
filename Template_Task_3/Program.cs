@@ -272,15 +272,13 @@ internal class Program
 
         // Fråga:
         // Varför är TryGetValue bättre än att skriva products[code] direkt?
-        Console.WriteLine("TryGetValue is better than products[code] because it will not crash our progam" +
+        Console.WriteLine("Svar: TryGetValue is better than products[code] because it will not crash our progam" +
             " in case a wrong input is given instead of throwing an exception TryGetValue handles that as a missing key" +
             " which will result in the program return false and a error message instead of crashing.");
     }
 
     static void AddProduct()
     {
-        Console.WriteLine("TODO: Implementera AddProduct.");
-      
         // TODO:
         // Läs in produktkod.
         // Gör produktkoden till stora bokstäver med .ToUpper().
@@ -292,9 +290,27 @@ internal class Program
         // Lägg till produkten i products-dictionaryn.
         // Lägg till ett loggmeddelande i logMessages.
 
+        string inputCode = InputHelpers.ReadString("Enter the code: ").ToUpper();
+
+        if(products.ContainsKey(inputCode))
+        {
+            Console.WriteLine("Code already belongs to a product please use a different one.");
+            return;
+        }
+
+        string productName = InputHelpers.ReadString("Enter product name: ");
+        decimal productPrice = InputHelpers.ReadDecimal("Enter product price: ");
+        int productStock = InputHelpers.ReadInt("Enter stock: ");
+
+        products[inputCode] = new Product(inputCode, productName, productPrice, productStock);
+
+        logMessages.Add($"Product {inputCode} - {productName} was added to the register.");
+        Console.WriteLine($"Product {inputCode} - {productName} was successfully added to the list!");
+
         // Fråga:
         // Vad är nyckeln och vad är värdet i products?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: The key is the product code example COFFEE and the value is the product" +
+            " object that contains all the information about said product. ");
     }
 
     static void ChangeStock()
