@@ -469,8 +469,6 @@ internal class Program
     static void PrintCustomerQueue()
     {
         Console.WriteLine("=== Kundkö ===");
-
-        // TODO:
         // Om customerQueue är tom, skriv att kön är tom.
         // Annars: loopa igenom customerQueue med en räknare.
         // Skriv ut platsnummer, namn och tidsstämpel för varje kund.
@@ -482,7 +480,23 @@ internal class Program
         //
         // Tips: foreach fungerar på Queue utan att ta bort elementen.
 
-        Console.WriteLine("TODO: Implementera PrintCustomerQueue.");
+        if (customerQueue.Count == 0)
+        {
+            Console.WriteLine("There is no customer in the queue.");
+            return;
+        }
+        else
+        {
+            int position = 0;
+
+            foreach (Customer customer in customerQueue)
+            {
+             position++;
+
+             Console.WriteLine($" {position} {customer.ToString()}"); 
+
+            }
+        }
     }
 
     #endregion
