@@ -732,26 +732,32 @@ internal class Program
 
         string[] weekdays = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag"];
 
-        // TODO:
         // Skriv ut alla veckodagar med en for-loop.
         // Tips: använd weekdays.Length för att veta hur många element det finns.
 
-        // TODO:
+        for( int i = 0; i < weekdays.Length; i++)
+        {
+            Console.WriteLine($"{i + 1} {weekdays[i]}");
+        }
+
         // Skriv ut alla veckodagar med foreach.
 
-        Console.WriteLine("TODO: Implementera utskrifter i ArrayLab.");
+        foreach (string item in weekdays)
+        {
+            Console.WriteLine(item);
+        }
 
         // Fråga 1:
         // När passar en array bättre än en List?
-        Console.WriteLine("Svar 1: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 1: AN array is better when we have a fixed amount of elements.");
 
         // Fråga 2:
         // Vad händer om du försöker skriva weekdays[5]?
-        Console.WriteLine("Svar 2: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 2: I will get an exception as position 4 is the last element in the array.");
 
         // Fråga 3:
         // Varför måste arrayens storlek anges från början?
-        Console.WriteLine("Svar 3: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 3: Because the program needs to give it exactly the amount of memory asked.");
     }
 
     #endregion
