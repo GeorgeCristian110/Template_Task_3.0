@@ -532,7 +532,7 @@ internal class Program
 
         Customer currentCustomer = customerQueue.Peek();
 
-        string productCode = InputHelpers.ReadString("Enter product code: ");
+        string productCode = InputHelpers.ReadString("Enter product code: ").ToUpper();
 
         if (products.TryGetValue(productCode, out Product? product))
         {
@@ -566,9 +566,6 @@ internal class Program
 
     static void UndoLastSale()
     {
-        Console.WriteLine("TODO: Implementera UndoLastSale.");
-
-        // TODO:
         // Kontrollera om saleHistory är tom — skriv meddelande om den är det.
         // Om den inte är tom:
         // Använd Pop för att hämta och ta bort senaste försäljningen.
@@ -576,19 +573,52 @@ internal class Program
         // Öka produktens Stock med 1.
         // Logga vad som ångrades i logMessages.
 
+        if (saleHistory.Count == 0)
+        {
+            Console.WriteLine("No sales exist");
+            return;
+        } else
+        {
+            Sale lastSale = saleHistory.Pop();
+            Console.WriteLine($"The last sold product is {lastSale.ProductCode} and it has been undone!");
+
+            if (products.TryGetValue(lastSale.ProductCode, out Product? product))
+            {
+                product.Stock++;
+                logMessages.Add($"{lastSale.ProductCode} has increased it's quantity");
+            } 
+        }
+
         // Fråga:
         // Vad betyder LIFO?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: LIFO stands for last in first out. Meaning in this case that the last" +
+            " item added to the stack is the first one to get removed. That's why we use a sale history" +
+            " because the last item that has been sold is the first one we will undo.");
     }
 
     static void ReverseTextLab()
     {
         Console.WriteLine("=== Stack-labb: vänd text ===");
-        Console.WriteLine("TODO: Implementera ReverseTextLab.");
-
-        // TODO:
         // Läs in en text från användaren.
         // Skriv ut texten bakofram använd en lämplig collektion.
+
+        string inputText = InputHelpers.ReadString("Please enter text here: ");
+
+        Stack<char> stack = new Stack<char>();
+
+        foreach( char c in inputText )
+        {
+            stack.Push(c);
+        }
+
+        string reversedText = "";
+
+        while (stack.Count > 0)
+        {
+            reversedText += stack.Pop();
+        }
+        Console.WriteLine($"The reversed verison of your text is: {reversedText}");
+
     }
 
     #endregion
