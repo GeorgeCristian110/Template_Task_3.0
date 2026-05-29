@@ -200,6 +200,7 @@ internal class Program
         {
             Console.WriteLine(item);
         }
+        
 
         Console.WriteLine();
     }
@@ -552,10 +553,10 @@ internal class Program
                 Console.WriteLine("Sorry the product desired is out of stock.");
             } 
         }
-        else
-        {
-            Console.WriteLine("The code introduced is invalid. Please try again!");
-        }
+    else
+       {
+        Console.WriteLine("The code introduced is invalid. Please try again!");
+       }
 
 
         // Fråga:
@@ -632,16 +633,24 @@ internal class Program
     static void PrintLog()
     {
         Console.WriteLine("=== Logg ===");
-
-        // TODO:
         // Om logMessages är tom, skriv "Inga loggmeddelanden finns."
         // Annars: loopa igenom logMessages och skriv ut varje meddelande.
-
-        Console.WriteLine("TODO: Implementera PrintLog.");
+        if (logMessages.Count == 0)
+        {
+            Console.WriteLine("Inga loggmeddelanden finns.");
+        }
+        else
+        {
+            foreach (string log in logMessages)
+            {
+                Console.WriteLine(logMessages);
+            }
+        }
 
         // Fråga:
         // Varför passar List bra för loggmeddelanden?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: A list is good for log messages because we can't know how many messages" +
+            " it will contain. A list will grow dynamically which allows us to add more messages.");
     }
 
     static void ListLab()
@@ -674,21 +683,34 @@ internal class Program
         // Lägg till minst 4 egna varor med en loop.
         // Skriv ut hela listan.
 
+        for(int i = 0; i < 4; i++)
+        {
+            string item = InputHelpers.ReadString($"Enter a new item {i + 1}: ");
+            shoppingList.Add(item);
+        } 
+
+        foreach (string item in shoppingList)
+        {
+            Console.WriteLine(item);
+        }
+
         // Fråga 1:
         // Vad betyder Count?
-        Console.WriteLine("Svar 1: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 1: It represents the number of items that we have currently inside a collection ");
 
         // Fråga 2:
         // Vad betyder Capacity?
-        Console.WriteLine("Svar 2: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 2: It means how many items we can store before it needs to add more memory");
 
         // Fråga 3:
         // Varför ökar inte Capacity med exakt 1 varje gång?
-        Console.WriteLine("Svar 3: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 3: Because if it would increase with 1 " +
+            " eveyrtime we add one item it would be very slow for larger lists. " +
+            " So by doubling the capacity it will reduce the times the list needs to resize.");
 
         // Fråga 4:
         // Minskar Capacity automatiskt när element tas bort?
-        Console.WriteLine("Svar 4: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 4: No it will keep the same size so when a new item is added there will already be space");
     }
 
     static void PrintListInfo(List<string> list, string message)
