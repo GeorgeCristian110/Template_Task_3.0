@@ -395,19 +395,20 @@ internal class Program
         prices["BUL"] = 18;
         prices["MCK"] = 35;
 
-        if(prices.TryGetValue(code, out decimal price))
+        if (prices.TryGetValue(code, out decimal price))
         {
+            Console.WriteLine($"Price for {code} is: {price}sek");
             return price;
-        } 
-        
-
-        // Fråga:
-        // Varför är Dictionary-lösningen bättre än många if/else-satser?
-        Console.WriteLine("Svar: Because dictionary it is faster, cleaner and easier to expand. Instead of adding a new" +
-            " if/else block everytime we want to bring in a new product here we can use only one line of code.");
-        
+        }
+        else
+        {
+            // Fråga:
+            // Varför är Dictionary-lösningen bättre än många if/else-satser?
+            Console.WriteLine("Svar: Because dictionary it is faster, cleaner and easier to expand. Instead of adding a new" +
+           " if/else block everytime we want to bring in a new product here we can use only one line of code.");
             return -1;
-        
+        }
+            
     }
 
     #endregion
@@ -455,11 +456,11 @@ internal class Program
             return; 
         }
 
-        Customer nextCutomer = customerQueue.Dequeue();
+        Customer nextCustomer = customerQueue.Dequeue();
 
-        Console.WriteLine($"Customer {nextCutomer} was served.");
+        Console.WriteLine($"Customer {nextCustomer.Name} was served.");
 
-        logMessages.Add($"Served customer: {nextCutomer.Name}");
+        logMessages.Add($"Served customer: {nextCustomer.Name}");
 
         // Fråga:
         // Varför passar Queue bättre än Stack för en kundkö?
@@ -775,7 +776,6 @@ internal class Program
         Console.WriteLine("Skriv en mening:");
         string text = ReadLine;
 
-        //ToDo: Skriv koden för CountWords
         Dictionary<string, int> wordCounts = CountWords(text);
 
         Console.WriteLine("Resultat:");
@@ -787,14 +787,13 @@ internal class Program
 
         // Fråga:
         // Varför passar Dictionary bra när vi ska räkna ord?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: Because we can check each words instantly by its key and use the count" +
+            " as the value for the words. Each word can only be entered once preventing duplicates.");
     }
 
     static Dictionary<string, int> CountWords(string text)
     {
         Dictionary<string, int> wordCounts = new Dictionary<string, int>();
-
-        // TODO:
         // Dela upp text i ord med string.Split.
         // Separera på: mellanslag (ett eller flera), punkt, !, ?, :, ;
         // Tips: string[] words = text.Split(new char[] { ' ', '.', '!', '?', ':', ';' },
@@ -805,9 +804,24 @@ internal class Program
         // Om ordet redan finns i wordCounts → öka värdet med 1.
         // Annars → lägg till ordet med värdet 1.
 
+        string[] words = text.Split(new char[] {' ', '.', '!', '?', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
+        {
+            string lowerWord = word.ToLower();
+
+            if (wordCounts.TryGetValue(lowerWord, out int count))
+            {
+                wordCounts[lowerWord] = count + 1;
+            } else
+            {
+                wordCounts.Add(lowerWord, 1);
+            }
+        }
+
         // Fråga:
         // Vad är nyckeln och vad är värdet i wordCounts?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: The key is the word itself and the value is the number of times it was used.");
 
         return wordCounts;
     }

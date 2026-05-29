@@ -32,7 +32,6 @@ public class MenuConstants
         new MenuItem(FindProduct,        "Sök produkt"),
         new MenuItem(AddProduct,         "Lägg till produkt"),
         new MenuItem(ChangeStock,        "Ändra lagersaldo"),
-        new MenuItem(GetBetterPrice,     "Refakturera if/else → Dictionary"),
         new MenuItem(AddCustomerToQueue, "Lägg kund i kö"),
         new MenuItem(ServeNextCustomer,  "Betjäna nästa kund"),
         new MenuItem(PrintCustomerQueue, "Visa kundkö"),
@@ -47,6 +46,7 @@ public class MenuConstants
         new MenuItem(MemoryLab,          "Stack och heap-labb"),
         new MenuItem(RecursionLab,       "Rekursion och iteration"),
         new MenuItem(SaveLogToFile,      "Spara logg till fil"),
+        new MenuItem(GetBetterPrice,     "Refakturera if/else → Dictionary"),
         new MenuItem(Exit,               "Avsluta"),
     };
 }
