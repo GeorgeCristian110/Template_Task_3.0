@@ -804,7 +804,8 @@ internal class Program
         // Om ordet redan finns i wordCounts → öka värdet med 1.
         // Annars → lägg till ordet med värdet 1.
 
-        string[] words = text.Split(new char[] {' ', '.', '!', '?', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] words = text.Split(new char[] {' ', '.', '!', '?', ':', ';' }, 
+            StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string word in words)
         {
@@ -846,7 +847,6 @@ internal class Program
         Console.WriteLine("Skriv en kodrad eller parentessträng:");
         string input = ReadLine;
 
-        //ToDo skriv koden för CheckParantheses
         bool isCorrect = CheckParentheses(input);
 
         if (isCorrect)
@@ -863,7 +863,6 @@ internal class Program
 
     static bool CheckParentheses(string text)
     {
-        // TODO:
         // Använd en Stack<char> och en Dictionary<char, char>.
         //
         // Tips Dictionary:
@@ -873,12 +872,43 @@ internal class Program
         // Tips Stack:
         // Stacken håller reda på vilka öppnare du sett men ännu inte stängt.
         // Tänk på vad LIFO innebär här — varför är det precis rätt egenskap för det här problemet?
-        //
+        
+        if (string.IsNullOrWhiteSpace(text))
+            return false;
+
+        Stack<char> bracketStack = new Stack<char>();
+        Dictionary<char, char> matchingBrackets = new Dictionary<char, char>();
+
+        matchingBrackets[')'] = '(';
+        matchingBrackets[']'] = '[';
+        matchingBrackets['}'] = '{';
+        matchingBrackets['>'] = '<';
+
+        foreach (char c in text)
+        {
+            if (matchingBrackets.ContainsKey(c))
+            {
+                if (bracketStack.Count == 0)
+                    return false;
+                
+                char top = bracketStack.Pop();
+                
+                if (matchingBrackets[c] != top)
+                    return false;
+            } 
+            else if (matchingBrackets.ContainsValue(c))
+            {
+                bracketStack.Push(c);
+            }
+        }
+
         // Fråga:
         // Varför är Dictionary + Stack bättre än bara Stack med if/else för matchningen?
-        Console.WriteLine("Svar: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar: Because it makes the code much cleaner and easier to maintain. " +
+            " Instead of using a bundle of if conditions i can just add or change them directly" +
+            " inside my dictionary without the need to change the logic for the code.");
 
-        return false;
+        return bracketStack.Count == 0;
     }
 
     // ============================================================
@@ -932,31 +962,43 @@ internal class Program
 
         // Fråga 1:
         // Varför ändras inte number1 när number2 ändras?
-        Console.WriteLine("Svar 1: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 1: Because int is a value type, which gets saved on the stack." +
+            " When we are assigning number1 to number2, an independent copy is created," +
+            " changing the value does not affect number1 which will still return 10 as the result.");
 
         // Fråga 2:
         // Varför ändras inte score1.Points när score2.Points ändras?
-        Console.WriteLine("Svar 2: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 2: A struct works with the same rules as an int. Because a struct" +
+            " is a value type that gets stored on the stack and even in this case score1 will retain" +
+            " its initial value while score2 will get an independent copy with a new value.");
 
         // Fråga 3:
         // Varför ändras product1.Stock när product2.Stock ändras?
-        Console.WriteLine("Svar 3: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 3: That happens because both product1 and product2 point" +
+            " to the same object on the heap. So when we change product2.Stock we are actually" +
+            " changing the same object that product1.Stock points to.");
 
         // Fråga 4:
         // Är Product en value type eller reference type?
-        Console.WriteLine("Svar 4: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 4: Product is a reference type because it is a class and classes" +
+            " are always stored on the heap.");
 
         // Fråga 5:
         // Vad ligger på heapen i Product-exemplet?
-        Console.WriteLine("Svar 5: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 5: On the heap we can find the product itself with all the properties" +
+            " that defines said product.");
 
         // Fråga 6:
         // Vad innebär det att två variabler kan peka på samma objekt?
-        Console.WriteLine("Svar 6: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 6: That means both of them will share the same memory on the heap." +
+            " They do act as two separate references for that object, but chagning one will affect" +
+            " the other one too.");
 
         // Fråga 7:
         // Vad är skillnaden mellan stacken i minnet och Stack<T> som datastruktur?
-        Console.WriteLine("Svar 7: TODO - skriv ditt svar här");
+        Console.WriteLine("Svar 7: The difference between the two is that the stack we have in memory" +
+            " is managed by the system for our variables and methods. Meanwhile the Stack<T>" +
+            " is a data structure that we use in order to store items in a Last-in, First-out order");
     }
 
     #endregion
